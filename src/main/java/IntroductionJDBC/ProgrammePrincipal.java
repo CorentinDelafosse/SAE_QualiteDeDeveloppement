@@ -1,9 +1,6 @@
 package IntroductionJDBC;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class ProgrammePrincipal {
     public static void main(String[] args) {
@@ -74,6 +71,18 @@ public class ProgrammePrincipal {
 
         try {
             monStatement.executeUpdate(requeteSansSelect);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+
+        //Select
+        requeteSansSelect = "Select IdLivre from Livres";
+        try {
+            ResultSet result = monStatement.executeQuery(requeteSansSelect);
+            while (result.next()){
+                System.out.println(result.getInt("IdLivre"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(-1);
